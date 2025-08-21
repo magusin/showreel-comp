@@ -10,7 +10,7 @@ export default function StatusPie({ data, colorsMap }) {
   }
 
   return (
-    <div style={{ width: 400, height: 250 }}>
+    <div style={{ width: 400, height: 300 }}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie data={cleaned} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={95} label>
