@@ -51,3 +51,101 @@ model TicketEvent {
   ticketId  String
   createdAt DateTime @default(now())
 }
+
+enum MachineStatus {
+  RUNNING
+  STOPPED
+  MAINTENANCE
+}
+
+enum Capability {
+  USINAGE
+  SOUDAGE
+  PLIAGE
+  PEINTURE
+  ASSEMBLAGE
+}
+
+model Machine {
+  id          String          @id @default(cuid())
+  name        String
+  code        String          @unique
+  status      MachineStatus   @default(RUNNING)
+  capabilities Capability[]   // ← liste des fonctions
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  metrics     MachineMetric[]
+  plans       MachineDailyPlan[] // ← plan conso/jour
+}
+
+model MachineMetric {
+  id        String    @id @default(cuid())
+  machineId String
+  machine   Machine   @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  timestamp DateTime  @default(now())
+  temperature Float
+  vibration   Float
+  speed       Int
+}
+
+model MachineDailyPlan {
+  id         String   @id @default(cuid())
+  machineId  String
+  resourceId String
+  qtyPerDay  Int      // quantité consommée par jour par cette machine
+  machine    Machine  @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+
+  @@unique([machineId, resourceId]) // 1 ligne par ressource/machine
+}
+
+model Resource {
+  id           String               @id @default(cuid())
+  sku          String               @unique
+  name         String
+  unit         String               @default("pcs")
+  stock        Int                  @default(0)
+  reorderPoint Int                  @default(0)  // seuil
+  targetStock  Int                  @default(0)  // stock cible
+  autoOrder    Boolean              @default(true) // ← autoriser auto-réappro
+  supplier     String?                         // ← optionnel
+  adjustments  ResourceAdjustment[]
+  orderItems   PurchaseOrderItem[]
+
+  MachineDailyPlan MachineDailyPlan[]
+}
+
+model ResourceAdjustment {
+  id         String   @id @default(cuid())
+  resourceId String
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  delta      Int
+  reason     String?
+  createdAt  DateTime @default(now())
+}
+
+enum OrderStatus {
+  DRAFT
+  PLACED
+  RECEIVED
+  CANCELED
+}
+
+model PurchaseOrder {
+  id        String              @id @default(cuid())
+  code      String              @unique
+  status    OrderStatus         @default(DRAFT)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  items     PurchaseOrderItem[]
+}
+
+model PurchaseOrderItem {
+  id        String         @id @default(cuid())
+  orderId   String
+  order     PurchaseOrder  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  resourceId String
+  resource  Resource       @relation(fields: [resourceId], references: [id])
+  qty       Int
+  unitPrice  Decimal?      // ← suffisant en PostgreSQL, sera mappé en NUMERIC
+}
