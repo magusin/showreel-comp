@@ -78,7 +78,7 @@ export default function TicketingDashboard({
 
   return (
     <TicketingLayout>
-      <div className="space-y-10">
+      <div className="space-y-8">
         {/* Header */}
         <header className="flex items-start justify-between gap-4">
           <div>

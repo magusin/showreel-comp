@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import RouletteLayout from '@/components/RouletteLayout';
 
 /** ---------- Config roues ---------- */
 const WHEEL_FR = 'FR'; // européenne (0-36)
@@ -301,8 +302,9 @@ export default function RouletteStats(){
   const numbersForPad = NUMBERS;
 
   return (
+    <RouletteLayout>
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="p-6">
         {/* Header + switch roue + actions */}
         <header className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
           <div className="space-y-2">
@@ -538,6 +540,7 @@ export default function RouletteStats(){
         </section>
       </div>
     </div>
+    </RouletteLayout>
   );
 }
 
