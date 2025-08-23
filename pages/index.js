@@ -32,9 +32,9 @@ export default function Home() {
               Le but&nbsp;: montrer concrètement mon parcours au-delà d’un CV.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#modules" className="px-5 py-3 bg-white text-indigo-700 font-medium rounded-lg shadow hover:opacity-90">
+              <Link href="#modules" className="px-5 py-3 bg-white text-indigo-700 font-medium rounded-lg shadow hover:opacity-90">
                 🚀 Explorer les modules
-              </a>
+              </Link>
               <a href="/cv.pdf" target="_blank" rel="noopener noreferrer"  className="px-5 py-3 border border-white/70 rounded-lg hover:bg-white/10">
                 📄 Voir mon CV
               </a>
