@@ -1,4 +1,5 @@
 import SideModuleNav from "./SideModuleNav";
+import Link from "next/link";
 
 export default function TicketingLayout({ children }) {
     return (
@@ -10,8 +11,9 @@ export default function TicketingLayout({ children }) {
             <p className="text-xs text-gray-500">Module de démonstration</p>
           </div>
           <nav className="flex flex-col gap-1">
-            <a href="/ticketing" className="px-3 py-2 rounded-lg hover:underline">📊 Tableau de bord</a>
-            <a href="/ticketing/new" className="px-3 py-2 rounded-lg hover:underline">➕ Nouveau ticket</a>
+            <Link href="/ticketing" className="px-3 py-2 rounded-lg hover:underline">📊 Tableau de bord</Link>
+            <Link href="/ticketing/new" className="px-3 py-2 rounded-lg hover:underline">➕ Nouveau ticket</Link>
+            <Link href="/ticketing/kb" className="px-3 py-2 rounded-lg hover:underline">📚 Base de connaissances</Link>
           </nav>
           <div className="mt-auto">
     <SideModuleNav current="ticketing" />
