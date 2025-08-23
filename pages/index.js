@@ -35,7 +35,7 @@ export default function Home() {
               <Link href="#modules" className="px-5 py-3 bg-white text-indigo-700 font-medium rounded-lg shadow hover:opacity-90">
                 🚀 Explorer les modules
               </Link>
-              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer"  className="px-5 py-3 border border-white/70 rounded-lg hover:bg-white/10">
+              <a href="/cv-hj.pdf" target="_blank" rel="noopener noreferrer"  className="px-5 py-3 border border-white/70 rounded-lg hover:bg-white/10">
                 📄 Voir mon CV
               </a>
             </div>
