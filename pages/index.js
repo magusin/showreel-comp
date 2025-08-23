@@ -96,7 +96,7 @@ export default function Home() {
                 <div>
                   <div className="text-4xl">🎫</div>
                   <h3 className="mt-2 text-2xl font-extrabold">Ticketing</h3>
-                  <p className="text-white/90 text-sm">Incidents, statuts, commentaires riches.</p>
+                  <p className="text-white/90 text-sm">Incidents, statuts, commentaires et base de connaissances.</p>
                 </div>
                 <div className="text-sm font-medium opacity-90 group-hover:opacity-100">
                   Cliquer pour ouvrir →
